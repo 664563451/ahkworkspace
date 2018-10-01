@@ -1,4 +1,4 @@
-﻿#IfWinActive,ahk_class D3 Main Window Class
+﻿#IfWinActive,ahk_class D3 Main Window Class 
 
 ;圣教军天谴流速刷AHK宏整合版
 ;CreateBy 曲终人尽散#5888
@@ -16,7 +16,6 @@
 ;关于哪里可以修改，注释里注明可改动的地方需要改，其他地方保持不变即可
 ;对于那些按键设置并不是1天谴2挑衅3律法4勇士x强制移动左键回能右键钢甲的玩家，请进游戏按esc-选项-按键绑定，可看到界面上指令、按键1、按键2，按键1对应的指令设成自己的习惯按键，按键2对应的指令设成1234x就行，这样天谴宏不影响你玩其他职业也不影响你之前的按键习惯
 
-
 SetKeyDelay,-1
 SetMouseDelay,-1
 
@@ -28,7 +27,6 @@ v_decompose_page_x:=515 ;铁匠分解页面的x坐标--（可以修改）
 v_decompose_page_y:=480 ;铁匠分解页面的y坐标--（可以修改）
 v_decompose_x:=165 ;分解按钮的x坐标-----------（可以修改）
 v_decompose_y:=290 ;分解按钮的y坐标-----------（可以修改）
-
 
 
 x_package_x_p:=560 ;背包一个格的x坐标--------（可以修改）
@@ -45,42 +43,43 @@ x_decompose_y:=195 ;分解按钮的y坐标-----------（可以修改）
 
 v_loop:=0 ;停止循环
 v_Enable=0  ;宏开关变量
-v_Tab=0     ;按Tab查看小地图暂停宏变量
+v_Tab=0     ;按Tab查看小地图暂停宏变量 
 v_LeftBtnAutoClick=1     ;是否连点左键
 v_RightBtnAutoClick=1    ;是否连点右键
 
 ;开关键，鼠标有侧键的玩家，可以将F2换成鼠标侧键对应的代码XButton1、XButton2
-$XButton2::
-{
-    v_Enable:=!v_Enable
-    If (v_Enable=0)
+$XButton2::   
+{ 
+    v_Enable:=!v_Enable 
+    If (v_Enable=0) 
         Gosub, StopScript
-    Else
+    Else 
         Gosub, RunScript
-}
-Return
+} 
+Return 
 
-~Enter::
-~T::
-~S::
-~I::
-~M::
+~Enter::  
+~T::     
+~S::      
+~I::      
+~M::      
 ;回车打字、按T回城、按S查看技能、按I查看装备、按M查看悬赏关闭宏
 {
     Gosub, StopScript
 }
 Return
 
+
 ~Tab::
 ;按Tab查看地形暂停宏和自动恢复
-If (v_Enable)
+If (v_Enable) 
 {
     v_Tab:=!v_Tab
     If (v_Tab)
         Gosub, PauseScript
-    Else
+    Else 
         Gosub, RunScript
-}
+}   
 Return
 
 ~*LButton::  ;按住左键停止强制移动
@@ -94,7 +93,7 @@ If (v_Enable)
 Return
 
 ~*LShift::  ;按住原地不动攻击
-If (v_Enable)
+If (v_Enable) 
 {
     SetAutoMove(false)
     Send {LShift down}
@@ -112,10 +111,10 @@ Return
 ~*RButton::  ;按住右键跑马暂停123和左键连点，保持强制移动，保持勇士连点
 If (v_Enable)
 {
-SetTimer, Label1, off
-SetTimer, Label2, off
-SetTimer, Label3, off
-SetTimer, MouseLButton, off
+SetTimer, Label1, off  
+SetTimer, Label2, off  
+SetTimer, Label3, off   
+SetTimer, MouseLButton, off       
 Send {x down}
 }
 Return
@@ -123,10 +122,10 @@ Return
 *RButton Up::  ;松开右键跑马恢复123和左键连点，保持强制移动，保持勇士连点
 If (v_Enable)
 {
-SetTimer, Label1, 650
-SetTimer, Label2, 600
-SetTimer, Label3, 600
-SetTimer, MouseLButton, 150
+SetTimer, Label1, 650  
+SetTimer, Label2, 600 
+SetTimer, Label3, 600  
+SetTimer, MouseLButton, 150       
 Send {x down}
 }
 Return
@@ -138,15 +137,15 @@ $F1::
     v_RightBtnAutoClick:=!v_RightBtnAutoClick
 Return
 
-$F4::  ;卡达拉赌血岩
-    Send {RButton 30}
+$F4::  ;卡达拉赌血岩 
+    Send {RButton 30} 
 Return
 
-~*XButton1:: ;按住侧键连点捡装备
+~*XButton1:: ;按住侧键连点捡装备 
     SetAutoLeftBtnClick(true)
 Return
 
-~*XButton1 Up:: ;松开侧键关闭连点捡装备
+~*XButton1 Up:: ;松开侧键关闭连点捡装备 
     SetAutoLeftBtnClick(false)
 Return
 
@@ -196,7 +195,7 @@ RunScript:
 
     SetAutoLeftBtnClick(v_LeftBtnAutoClick)
     SetAutoRightBtnClick(v_RightBtnAutoClick)
-
+        
     Send {x down}   ;自动按住强制移动键x，关闭强制移动down换up，down可改动
 
     SetTimer, StopScriptIfD3NotActive, 150
@@ -210,7 +209,7 @@ PauseScript:
 
     SetAutoLeftBtnClick(false)  ;关闭左键连点计时器
     SetAutoRightBtnClick(false) ;关闭右键连点计时器
-
+    
     Send {x up}    ;松开强制移动键x，
 
     SetTimer, StopScriptIfD3NotActive, off
@@ -221,7 +220,7 @@ StopScript:
     v_Enable=0
 Return
 
-SetAutoMove(isON)
+SetAutoMove(isON) 
 {
     If (isON)
         Send {x down}
@@ -229,15 +228,15 @@ SetAutoMove(isON)
         Send {x up}
 }
 
-SetAutoLeftBtnClick(isON)
+SetAutoLeftBtnClick(isON) 
 {
     If (isON)
-        SetTimer, MouseLButton, 100  ;鼠标左键150毫秒连点，150可改动，只有这里需要改动
+        SetTimer, MouseLButton, 50  ;鼠标左键150毫秒连点，150可改动，只有这里需要改动
     Else
         SetTimer, MouseLButton, off
 }
 
-SetAutoRightBtnClick(isON)
+SetAutoRightBtnClick(isON) 
 {
     If (isON)
         SetTimer, MouseRButton, 600  ;鼠标右键600毫秒连点，钢甲手动触发，自动钢甲off换成600，off可改动
@@ -256,13 +255,13 @@ Return
 $F11::
 {
 	; 升级宝石
-	UpdateGem(3)
+	UpdateGem(3) 
 }
 return
 
 UpdateGem(x = 0){
-	; 多个角色升级宝石
-
+	; 多个角色升级宝石 
+	
 	global v_loop
 
 	var_firstPId:=0
@@ -271,7 +270,9 @@ UpdateGem(x = 0){
 	WinGetPos, X, Y, Width, Height, A  ; "A" 表示获取活动窗口的位置.
 	WinGet, active_id, ID, A
 	var_firstPId:=active_id
-	v_loop:=1
+	;MsgBox, 1The active window's ID is "%var_firstPId%".
+
+	v_loop:=1 
 	Loop, 6
 	{
 		v_outIndex:=A_Index
@@ -279,37 +280,50 @@ UpdateGem(x = 0){
 			{
 				;获取pid
 				this_id := id%A_Index%
-					WinGetPos, X, Y, XWidth, XHeight, A  ; "A" 表示获取活动窗口的位置.
+				Sleep, 100 ; 
 				if(v_loop = 1){
 					if(v_outIndex<5){
 						WinActivate, ahk_id %this_id%
-						Sleep, 300 ;
-						updateSingleGem(v_outIndex)
+						Sleep, 300 ; 
+						updateSingleGem(v_outIndex) 
 						Sleep, 100 ;
 					}else if(v_outIndex = 5){
-						if(var_firstPId=this_id){
-							Send {T}
-						}else{
+						WinActivate, ahk_id %this_id%
+					
+	
+						Sleep, 400 ;
+						if(var_firstPId=this_id){								
 							Sleep, 100 ;
+							Send {T}	
+							Sleep, 5000 ; 
+						}else{
+							Sleep, 100 ; 
 							Gosub, moveToMe
+							Sleep, 100 ; 
 						}
 					}else{
-						if(var_firstPId=this_id){
-							Sleep, 3000 ;
-							WinActivate, var_firstPId
-							DllCall("SetCursorPos", int, 1322, int, 171)  ; 第一个数字是 X 坐标而第二个是 Y (相对于屏幕).
-							Click Left ;
+						Sleep, 100 ; 
+						WinActivate, ahk_id %this_id%
+						if(var_firstPId=this_id){	
+							
+							WinActivate, ahk_id var_firstPId							 
+							DllCall("SetCursorPos", int, 1322, int, 171)  
+							Click Left ;															
 						}else{
 							Sleep, 3000 ;
+							WinActivate, ahk_id %this_id%
+							WinGetPos, X, Y, XWidth, XHeight, A  ; "A" 表示获取活动窗口的位置.
+							Sleep, 100 ; 
 							knock(2, XWidth, XHeight)
+							Sleep, 100 ; 
 						}
 					}
-
+	  
 				}
-
+				
 			}
 	}
-	WinActivate, first_id
+;	WinActivate, ahk_id var_firstPId
 	DllCall("SetCursorPos", int, Width//2, int, Height//2)  ; 第一个数字是 X 坐标而第二个是 Y (相对于屏幕).
 	Click Left ;
 }
@@ -319,27 +333,27 @@ updateSingleGem(v_outIndex){
 	WinGetPos, X, Y, Width, Height, A  ; "A" 表示获取活动窗口的位置.
 	if(Width=1920){
 		MouseMove, 260, 550 ,2
-		Sleep, 100 ;
-		Click Left ;
+		Sleep, 100 ; 
+		Click Left ; 
 	}else{
 		if(v_outIndex=1){
 			MouseMove, 65, 390 ,2
-			Sleep, 100 ;
-			Click Left ;
+			Sleep, 100 ; 
+			Click Left ; 		
 		}
 		MouseMove, 150, 335 ,2
-		Sleep, 100 ;
-		Click Left ;
+		Sleep, 100 ; 
+		Click Left ; 
 	}
 
 }
-
+ 
 
 
 
 
 $F7:: ;批量敲碎装备 ;F7-------可以修改
-{
+{ 
 	WinGetPos, X, Y, Width, Height, A  ; "A" 表示获取活动窗口的位置.
 
 	global v_decompose_page_x
@@ -362,7 +376,7 @@ $F7:: ;批量敲碎装备 ;F7-------可以修改
 		decompose_x:=x_decompose_x
 		decompose_y:=x_decompose_y
 	}
-
+	
 	MouseMove, decompose_page_x, decompose_page_y, 0
 	Click Left ;
 	MouseMove, decompose_x, decompose_y, 0
@@ -372,44 +386,44 @@ $F7:: ;批量敲碎装备 ;F7-------可以修改
 	Click Right ;
 	Send, {Esc}
 	MouseMove, Width//2, Height//2, 0
+	
 
-
-
-}
-Return
+	
+} 
+Return 
 
 
 $F8:: ; 批量扔装备 ;F8-------可以修改
-{
+{ 
 	WinGetPos, X, Y, Width, Height, A  ; "A" 表示获取活动窗口的位置.
 	v_loop:=1
 
 	knock(2, Width, Height)
 
-}
-Return
+} 
+Return 
 
 
 
 ; 敲碎或者扔到地上
 killIt(x,Width,Height){
 
-
-	if(x=1){
+	
+	if(x=1){				
 		Click Left ;
 		;MouseMove, Width//2, Height//2, 0
 		;Click Left ;
 		Send {enter}
-		Send {enter}
-
+		Send {enter}		
+		
 	}else{
 		Click, down  ;
 		MouseMove, Width//2, Height//2, 0
 		Click, up  ;
 		;Send {enter}
 	}
-
-}
+		
+} 
 
 
 ; 循环执行 敲碎或者扔到地上
@@ -445,7 +459,7 @@ v_c_y:=package_y_p
 Loop, 6{    ;六行物品栏
 	Loop, 9   ;九列物品栏
 	{
-
+		
 		if(v_loop=1){
 			MouseMove, v_cp, v_c_y, 0
 			v_cp:=v_cp+package_x_to_x
@@ -456,7 +470,7 @@ Loop, 6{    ;六行物品栏
 	v_cp:=package_x_p
 	v_c_y:=v_c_y+package_y_to_y
 }
-
+ 
 }
 
 
@@ -465,7 +479,7 @@ Loop, 6{    ;六行物品栏
 ; 2次 传送至我这
 ; 3次 升级宝石（小号升级4次）
 $F12::
-if pause_presses > 0
+if pause_presses > 0 
 {
     pause_presses += 1
     return
@@ -476,7 +490,7 @@ pause_presses = 1
 SetTimer, KeyPause, -400 ; 在 400 毫秒内等待更多的键击.
 return
 KeyPause:
-changeWin(pause_presses)
+changeWin(pause_presses) 
 ; 不论触发了上面的哪个动作, 都对 count 进行重置
 ; 为下一个系列的按下做准备:
 pause_presses = 0
@@ -490,7 +504,7 @@ return
 ; 4=小号扔装备
 ; 5=
 changeWin(x = 1){
-
+	
 	global v_loop
 	var_firstPId:=0
 	;获取暗黑的游戏窗口
@@ -498,18 +512,18 @@ changeWin(x = 1){
 	WinGetPos, I, J, Width, Height, A  ; "A" 表示获取活动窗口的位置.
 	WinGet, active_id, ID, A
 	Loop, %id%
-	{
+	{	
 		;获取pid
 		this_id := id%A_Index%
-
+		
 		; 前置参数
-		if(A_Index = 1){
+		if(A_Index = 1){ 
 			var_firstPId := id%A_Index%
 		}
 		if(A_Index > 1){
 		}
-
-
+		
+		
 		; 执行方法
 		if(x = 1){
 			; 开启大秘境 其他角色接受
@@ -524,27 +538,27 @@ changeWin(x = 1){
 				;跳转其他窗口
 				WinActivate, ahk_id %this_id%
 				;接受
-				Send {z}
+				Send {z}			
 				Sleep, 500
-				Click, 410, 490
+				Click, 410, 490 
 			}
 
 		}else if(x = 2){
 			; 传送至我这 多个角色传送我这
 			if(A_Index > 1){
-				;跳转其他窗口
-				Send {z}
+				;跳转其他窗口							
 				WinActivate, ahk_id %this_id%
+				Send {z}
 				Sleep, 100
 				MouseMove, 43, 165 ,2
 
-				Sleep, 50  ;
-				Click right ;
+				Sleep, 50  ; 
+				Click right ;  
 
 				MouseMove, 100, 245 ,2
-
+					
 				Sleep, 200  ;
-				Click Left ;
+				Click Left ;  
 				Sleep, 100
 			}
 
@@ -552,9 +566,9 @@ changeWin(x = 1){
 			; 多个角色回城
 			if(A_Index > 1){
 				;跳转其他窗口
-				Send {z}
+				Send {z}			
 				WinActivate, ahk_id %this_id%
-				Send {t}
+				Send {t}			
 			}
 
 		}
@@ -562,20 +576,19 @@ changeWin(x = 1){
 	WinActivate, active_id
 	DllCall("SetCursorPos", int, Width//2, int, Height//2)  ; 第一个数字是 X 坐标而第二个是 Y (相对于屏幕).
 	Click Left ;
-
+ 
 }
 
 moveToMe:
-	;跳转其他窗口
+	;跳转其他窗口		
 	Sleep, 100
 	MouseMove, 43, 165 ,2
 
-	Sleep, 50  ;
-	Click right ;
-
+	Sleep, 100  ; 
+	Click right ;  
+	Sleep, 100  ; 
 	MouseMove, 100, 245 ,2
-
 	Sleep, 200  ;
-	Click Left ;
+	Click Left ;  
 	Sleep, 100
 return
